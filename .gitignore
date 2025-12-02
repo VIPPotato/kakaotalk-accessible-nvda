@@ -12,3 +12,5 @@ manifest.ini
 
 .gemini/
 gha-creds-*.json
+GEMINI.md
+log.txt
