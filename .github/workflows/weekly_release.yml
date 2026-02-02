@@ -1,0 +1,71 @@
+name: weekly release
+
+on:
+  schedule:
+    # Weekly (Sunday 00:00 UTC)
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Detect add-on changes
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base_tag=""
+          if git describe --tags --abbrev=0 --match "weekly-*" >/dev/null 2>&1; then
+            base_tag="$(git describe --tags --abbrev=0 --match "weekly-*")"
+          elif git describe --tags --abbrev=0 >/dev/null 2>&1; then
+            base_tag="$(git describe --tags --abbrev=0)"
+          fi
+
+          echo "base_tag=$base_tag" >> "$GITHUB_OUTPUT"
+
+          if [ -n "$base_tag" ]; then
+            changed="$(git diff --name-only "$base_tag"..HEAD -- addon/ buildVars.py sconstruct manifest.ini.tpl site_scons/ || true)"
+          else
+            changed="$(git ls-files addon/ buildVars.py sconstruct manifest.ini.tpl site_scons/ || true)"
+          fi
+
+          if [ -z "$changed" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "Changed files:"
+          echo "$changed"
+
+      - name: Create and push weekly tag
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Avoid re-tagging the same commit when re-running.
+          if [ -n "$(git tag --points-at HEAD --list 'weekly-*')" ]; then
+            echo "HEAD already has a weekly tag. Nothing to do."
+            exit 0
+          fi
+
+          tag="weekly-$(date -u +%Y%m%d)"
+          if git rev-parse "refs/tags/$tag" >/dev/null 2>&1; then
+            echo "Tag $tag already exists. Nothing to do."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$tag" -m "Weekly automated release"
+          git push origin "$tag"

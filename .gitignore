@@ -1,7 +1,7 @@
-addon/doc/*.css
-addon/doc/en/
 *_docHandler.py
+# Track add-on documentation HTML/CSS under addon/doc (other HTML is still ignored).
 *.html
+!addon/doc/**/*.html
 manifest.ini
 *.mo
 *.pot
