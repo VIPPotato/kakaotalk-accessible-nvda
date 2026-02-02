@@ -1,5 +1,4 @@
-> Korean translation is available below.  
-> 아래에 한국어 번역이 있습니다.
+## Korean translation below (한국어 번역은 아래에 있습니다)
 
 # KakaoTalk Accessible NVDA Add-on
 
