@@ -29,15 +29,28 @@ class KakaoListItem(NVDAObjects.UIA.UIA):
 			name = str(self.value)
 		return name
 
+class KakaoMenuItem(NVDAObjects.UIA.UIA):
+	"""Custom menu item to allow focus events in KakaoTalk context menus.
+
+	KakaoTalk menu items report HasKeyboardFocus as False,
+	causing NVDA to drop UIA focus change events.
+	See: NVDA UIAHandler/__init__.py:912, NVDAObjects/UIA/__init__.py:1579-1583
+	"""
+
+	# Allow focus events even when HasKeyboardFocus is False.
+	shouldAllowUIAFocusEvent = True
+
 class AppModule(appModuleHandler.AppModule):
 	"""
 	App Module for KakaoTalk.
 	"""
-	
+
 	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
 		# Apply our custom list item class to list items in the KakaoTalk specific list control.
 		if obj.windowClassName == "EVA_VH_ListControl_Dblclk" and obj.role in [controlTypes.Role.LISTITEM, controlTypes.Role.TREEVIEWITEM]:
 			clsList.insert(0, KakaoListItem)
+		elif obj.windowClassName == "EVA_Menu" and obj.role == controlTypes.Role.MENUITEM:
+			clsList.insert(0, KakaoMenuItem)
 
 	def isGoodUIAWindow(self, hwnd):
 		"""
