@@ -24,11 +24,12 @@ addon_info = AddonInfo(
 	addon_description=_("""Improves accessibility of KakaoTalk for NVDA users.
 Specifically targets accessibility issues with lists (Contacts, Chats, Messages)."""),
 	# version
-	addon_version="0.1",
+	addon_version="0.2",
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
-	addon_changelog=_("""Initial version.
-Basic App Module structure."""),
+	addon_changelog=_("""Improved stability to prevent UIA COM freezes in KakaoTalk.
+Added reliable focus announcements for context menu items and selected list items.
+Reduced braille-related stalls in menus and message input handling."""),
 	# Author(s)
 	addon_author="VIPPotato",
 	# URL for the add-on documentation support
@@ -40,7 +41,7 @@ Basic App Module structure."""),
 	# Minimum NVDA version supported (e.g. "2019.3.0", minor version is optional)
 	addon_minimumNVDAVersion="2022.1",
 	# Last NVDA version supported/tested (e.g. "2024.4.0", ideally more recent than minimum version)
-	addon_lastTestedNVDAVersion="2026.4",
+	addon_lastTestedNVDAVersion="2025.3.2",
 	# Add-on update channel (default is None, denoting stable releases,
 	# and for development releases, use "dev".)
 	# Do not change unless you know what you are doing!
