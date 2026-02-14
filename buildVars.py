@@ -21,15 +21,14 @@ addon_info = AddonInfo(
 	addon_summary=_("KakaoTalk Accessibility Enhancements"),
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-on store
-	addon_description=_("""Improves accessibility of KakaoTalk for NVDA users.
-Specifically targets accessibility issues with lists (Contacts, Chats, Messages)."""),
+	addon_description=_("Improves accessibility of KakaoTalk for NVDA users."),
 	# version
-	addon_version="0.2",
+	addon_version="0.2.1",
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
-	addon_changelog=_("""Improved stability to prevent UIA COM freezes in KakaoTalk.
-Added reliable focus announcements for context menu items and selected list items.
-Reduced braille-related stalls in menus and message input handling."""),
+	addon_changelog=_("""Fixed add-on store checksum mismatch by publishing a new 0.2.1 release.
+Included updated bundled documentation and manifest metadata.
+Retained UIA freeze prevention and focus stability improvements from 0.2."""),
 	# Author(s)
 	addon_author="VIPPotato",
 	# URL for the add-on documentation support

@@ -1,7 +1,6 @@
-# KakaoTalk Accessibility Enhancements 0.2
+# KakaoTalk Accessibility Enhancements 0.2.1
 
-## Changes since 0.1
-- Improved stability by preventing UIA COM freezes during KakaoTalk list and context menu navigation.
-- Added reliable focus announcements for selected list items and context menu items.
-- Reduced braille-related stalls in menus and message input handling to improve responsiveness.
-- Hardened object state/name handling against COM errors that previously caused focus instability.
+## Changes since 0.2
+- Fixed Add-on Store checksum mismatch by releasing a new immutable package version (`0.2.1`).
+- Included updated bundled documentation and manifest metadata.
+- Kept stability and accessibility improvements from `0.2` (UIA freeze prevention and focus behavior fixes).
