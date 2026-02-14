@@ -1,35 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="../style.css" media="screen">
-	<title>KakaoTalk Accessibility Enhancements</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="../style.css" media="screen">
+<title>KakaoTalk Accessibility Enhancements 20260210.0.0</title>
 </head>
 <body>
-	<h1>KakaoTalk Accessibility Enhancements</h1>
-
-	<h2>What this add-on does</h2>
-	<p>
-		KakaoTalk uses custom list controls that can cause NVDA to keep focus on the list container instead of the selected
-		item. This add-on improves accessibility by ensuring list items (Contacts, Chats, message lists) are announced
-		correctly as you move through them.
-	</p>
-
-	<h2>Installation</h2>
-	<ol>
-		<li>Download the latest <code>.nvda-addon</code> from the GitHub Releases page.</li>
-		<li>Open the file and confirm installation in NVDA.</li>
-		<li>Restart NVDA when prompted.</li>
-	</ol>
-
-	<h2>Usage</h2>
-	<p>No configuration is required. Navigate KakaoTalk lists with the arrow keys and NVDA should announce the currently selected item.</p>
-
-	<h2>Troubleshooting</h2>
-	<ul>
-		<li>If items still aren’t announced, confirm you’re using a supported NVDA version (see Add-on Information in NVDA).</li>
-		<li>When reporting bugs, include your NVDA version, KakaoTalk version, and a copy of the NVDA log (set logging to “Debug” if needed).</li>
-	</ul>
+<h2>Korean translation below (한국어 번역은 아래에 있습니다)</h2>
+<h1>KakaoTalk Accessible NVDA Add-on</h1>
+<h2>Overview</h2>
+<p>This NVDA add-on improves the accessibility of the desktop version of KakaoTalk for screen reader users. It specifically addresses issues where lists (such as friends lists, chat lists, and message histories) are not properly readable or navigable using NVDA.</p>
+<h2>Features</h2>
+<ul>
+<li><strong>Improved List Navigation</strong>: Forces proper focus handling for KakaoTalk's custom list controls (<code>EVA_VH_ListControl_Dblclk</code>), ensuring that list items are correctly announced when navigating with arrow keys.</li>
+<li><strong>Focus Fixes</strong>: Prevents focus from getting "stuck" on the parent container, ensuring the actual list items receive focus.</li>
+</ul>
+<h2>Installation</h2>
+<ol>
+<li>Download the latest release from the <a href="https://github.com/VIPPotato/kakaotalk-accessible-nvda/releases">Releases page</a>.</li>
+<li>Open the downloaded <code>.nvda-addon</code> file.</li>
+<li>Follow the prompts to install the add-on in NVDA.</li>
+<li>Restart NVDA when prompted.</li>
+</ol>
+<h2>Usage</h2>
+<p>Once installed, the add-on works automatically. When you navigate lists within KakaoTalk (e.g., the Friends list or Chat list), NVDA should now correctly announce the focused item.</p>
+<h2>Development</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Python 3.11 or later</li>
+<li>SCons (<code>pip install scons</code>)</li>
+</ul>
+<h3>Building</h3>
+<p>To build the add-on from source:
+1.  Clone the repository.
+2.  Run <code>scons</code> in the root directory.
+3.  The <code>.nvda-addon</code> package will be generated in the same directory.</p>
+<h2>License</h2>
+<p>This project is licensed under the GNU General Public License, version 2 or later. See <code>COPYING.txt</code> for details.</p>
+<hr />
+<h1>카카오톡 접근성 향상 NVDA 애드온</h1>
+<h2>개요</h2>
+<p>이 NVDA 애드온은 화면 읽기 프로그램 사용자를 위해 카카오톡 데스크톱 앱의 접근성을 개선합니다. 특히 친구 목록, 채팅 목록, 메시지 기록과 같은 목록이 NVDA에서 제대로 읽히거나 탐색되지 않는 문제를 해결하는 데 초점을 맞춥니다.</p>
+<h2>기능</h2>
+<ul>
+<li><strong>목록 탐색 개선</strong>: 카카오톡의 커스텀 목록 컨트롤(<code>EVA_VH_ListControl_Dblclk</code>)에서 포커스 처리를 보정하여, 방향키로 이동할 때 항목이 올바르게 읽히도록 합니다.</li>
+<li><strong>포커스 수정</strong>: 포커스가 부모 컨테이너에 “고정”되는 현상을 방지하고, 실제 목록 항목이 포커스를 받도록 합니다.</li>
+</ul>
+<h2>설치</h2>
+<ol>
+<li><a href="https://github.com/VIPPotato/kakaotalk-accessible-nvda/releases">릴리스 페이지</a>에서 최신 버전을 다운로드합니다.</li>
+<li>다운로드한 <code>.nvda-addon</code> 파일을 엽니다.</li>
+<li>NVDA 설치 안내에 따라 애드온을 설치합니다.</li>
+<li>안내가 나오면 NVDA를 재시작합니다.</li>
+</ol>
+<h2>사용 방법</h2>
+<p>설치 후 애드온은 자동으로 동작합니다. 카카오톡 내의 목록(예: 친구 목록, 채팅 목록)을 탐색하면 NVDA가 현재 항목을 올바르게 읽어야 합니다.</p>
+<h2>개발</h2>
+<h3>준비물</h3>
+<ul>
+<li>Python 3.11 이상</li>
+<li>SCons (<code>pip install scons</code>)</li>
+</ul>
+<h3>빌드</h3>
+<p>소스에서 애드온을 빌드하려면:
+1.  이 저장소를 클론합니다.
+2.  루트 디렉터리에서 <code>scons</code>를 실행합니다.
+3.  같은 디렉터리에 <code>.nvda-addon</code> 패키지가 생성됩니다.</p>
+<h2>라이선스</h2>
+<p>이 프로젝트는 GNU General Public License 2 이상으로 배포됩니다. 자세한 내용은 <code>COPYING.txt</code>를 참고하세요.</p>
 </body>
 </html>
