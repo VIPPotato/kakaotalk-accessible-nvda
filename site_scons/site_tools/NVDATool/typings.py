@@ -1,5 +1,4 @@
-from typing import TypedDict, Protocol
-
+from typing import Protocol, TypedDict
 
 
 class AddonInfo(TypedDict):
@@ -20,19 +19,25 @@ class AddonInfo(TypedDict):
 
 
 class BrailleTableAttributes(TypedDict):
-    displayName: str
-    contracted: bool
-    output: bool
-    input: bool
+	displayName: str
+	contracted: bool
+	output: bool
+	input: bool
 
 
 class SymbolDictionaryAttributes(TypedDict):
-    displayName: str
-    mandatory: bool
+	displayName: str
+	mandatory: bool
+
+
+class SpeechDictionaryAttributes(TypedDict):
+	displayName: str
+	mandatory: bool
 
 
 BrailleTables = dict[str, BrailleTableAttributes]
 SymbolDictionaries = dict[str, SymbolDictionaryAttributes]
+SpeechDictionaries = dict[str, SpeechDictionaryAttributes]
 
 
 class Strable(Protocol):

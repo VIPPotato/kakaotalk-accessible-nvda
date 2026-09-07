@@ -1,6 +1,5 @@
 import appModuleHandler
 import api
-import ui
 import controlTypes
 import speech
 import vision
@@ -16,9 +15,11 @@ from _ctypes import COMError
 # Window classes that are known to require UIA for proper accessibility.
 # EVA_VH_ListControl_Dblclk: Main list control (contacts, chats, messages).
 #   Returning False for this class causes the window to lose focus entirely.
-_GOOD_UIA_WINDOW_CLASSES = frozenset({
-	"EVA_VH_ListControl_Dblclk",
-})
+_GOOD_UIA_WINDOW_CLASSES = frozenset(
+	{
+		"EVA_VH_ListControl_Dblclk",
+	}
+)
 
 
 class KakaoUIABase(NVDAObjects.UIA.UIA):
@@ -146,7 +147,7 @@ class KakaoTalkMessageEdit(NVDAObjects.IAccessible.IAccessible):
 	def initOverlayClass(self):
 		self.shouldAllowIAccessibleTextChangeEvent = True
 		self.hasIAccessibleTextObject = True
-		if hasattr(self, '_accRole'):
+		if hasattr(self, "_accRole"):
 			self._accRole = 0
 		self.braille_role = None
 		self.hasBraille = False
@@ -157,7 +158,7 @@ class KakaoTalkMessageEdit(NVDAObjects.IAccessible.IAccessible):
 		if obj:
 			try:
 				obj.accRole = 0
-				if hasattr(obj, '_accRole'):
+				if hasattr(obj, "_accRole"):
 					obj._accRole = 0
 			except Exception:
 				pass
@@ -232,9 +233,7 @@ class KakaoTalkMessageEdit(NVDAObjects.IAccessible.IAccessible):
 	def event_valueChange(self):
 		"""Handle value change with speech only, skip braille."""
 		if self is api.getFocusObject():
-			speech.speakObjectProperties(
-				self, value=True, reason=controlTypes.OutputReason.CHANGE
-			)
+			speech.speakObjectProperties(self, value=True, reason=controlTypes.OutputReason.CHANGE)
 		vision.handler.handleUpdate(self, property="value")
 
 	def event_caret(self):
@@ -267,9 +266,9 @@ class AppModule(appModuleHandler.AppModule):
 		# returns True would still use the base class buildUpdatedCache,
 		# causing 10-22 second freezes.
 		if isinstance(obj, NVDAObjects.UIA.UIA):
-			if (
-				obj.windowClassName == "EVA_VH_ListControl_Dblclk"
-				and obj.role in (controlTypes.Role.LISTITEM, controlTypes.Role.TREEVIEWITEM)
+			if obj.windowClassName == "EVA_VH_ListControl_Dblclk" and obj.role in (
+				controlTypes.Role.LISTITEM,
+				controlTypes.Role.TREEVIEWITEM,
 			):
 				clsList.insert(0, KakaoListItem)
 			elif obj.windowClassName == "EVA_Menu":
@@ -290,10 +289,8 @@ class AppModule(appModuleHandler.AppModule):
 		braille updates and focus instability in the message input field.
 		"""
 		import locale
-		if (
-			obj.role == controlTypes.Role.EDITABLETEXT
-			and (obj.name == "Enter a message" or obj.name is None)
-		):
+
+		if obj.role == controlTypes.Role.EDITABLETEXT and (obj.name == "Enter a message" or obj.name is None):
 			current_locale, _ = locale.getdefaultlocale()
 			if current_locale and current_locale.startswith("ko"):
 				return
